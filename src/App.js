@@ -141,7 +141,7 @@ class App extends Component {
   }
 
    componentDidMount() {
-    fetch('http://localhost:4567/items.json').then(res => { console.log(res.clone().json()); return  res.clone().json()}).then(items => {
+    fetch('https://todoserverpwafirstofmine.herokuapp.com/items.json').then(res => { console.log(res.clone().json()); return  res.clone().json()}).then(items => {
       console.log("thisis from the compopnent", items);
       this.setState({items, loading: false})
     })
@@ -162,7 +162,7 @@ class App extends Component {
   addItem = (e) => {
     e.preventDefault()
 
-    fetch('http://localhost:4567/items.json',{
+    fetch('https://todoserverpwafirstofmine.herokuapp.com/items.json',{
       method: 'POST',
       body: JSON.stringify({item: this.state.todoItem}),
       headers: {
@@ -182,7 +182,7 @@ class App extends Component {
   }
 
   deleteItem = (itemId) => {
-    fetch('http://localhost:4567/items.json',{
+    fetch('https://todoserverpwafirstofmine.herokuapp.com/items.json',{
       method: 'Delete',
       body:JSON.stringify({id:itemId}),
       headers:{
