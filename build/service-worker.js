@@ -9,7 +9,7 @@ workbox.routing.registerRoute(
 )
 
 workbox.routing.registerRoute(
-  new RegExp('http://.*:4567.*\.json'),
+  new RegExp('https://todoserverpwafirstofmine.herokuapp.com/'),
   workbox.strategies.networkFirst()
 )
 
