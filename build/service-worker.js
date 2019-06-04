@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.2e8baa4620e7484e49798330d7e9febc.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.c7f0e038a4e9a94c1169957d00552d14.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 
 workbox.routing.registerRoute(
@@ -36,6 +36,13 @@ self.addEventListener('fetch', event => {
       })
     )
   }
+})
+
+self.addEventListener('push', event => {
+  event.waitUntil(self.registration.showNotification('Todo List',{
+    icon:'/256*256.png',
+    body: event.data.text()
+  }))
 })
 
 workbox.precaching.precacheAndRoute(self.__precacheManifest)

@@ -8,25 +8,19 @@ const port = 4567
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true}))
 
-app.use(function(req, res, next){
-    res.header("Access-Control-Allow_origin", "*");
-    res.header(
-        "Access-Control-Allow-Methods",
-        "GET", "POST", "OPTIONS", "PUT", "DELETE"
-    );
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-})
-
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header(
+      "Access-Control-Allow-Methods", 
+      "GET, POST, OPTIONS, PUT, DELETE"
+    );
+    res.header(
+      "Access-Control-Allow-Headers", 
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
     next();
-  })
-
+  });
+  
 let items = [
     {id: uuidv4(), item: 'Learn about PWAs'},
     {id: uuidv4(), item: 'Make an awesome app'}
@@ -37,6 +31,7 @@ app.get('/items.json', (req, res) => {
 })
 
 app.post('/items.json',(req, res) =>  {
+    console.log("this is from add");
     items.push({
         id: uuidv4(),
         item:req.body.item
@@ -45,6 +40,7 @@ app.post('/items.json',(req, res) =>  {
 })
 
 app.delete('/items.json', (req, res) => {
+    console.log("this is from delete method");
     items = items.filter(item => {
         if(item.id!== req.body.id){
             return item

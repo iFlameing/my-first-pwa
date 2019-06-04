@@ -3,133 +3,133 @@ import logo from './logo.svg';
 import './App.css';
 
 
-function urlBase64ToUint8Array(base64String) {
-  var padding = '='.repeat((4 - base64String.length % 4) % 4);
-  var base64 = (base64String + padding)
-      .replace(/\-/g, '+')
-      .replace(/_/g, '/');
+// function urlBase64ToUint8Array(base64String) {
+//   var padding = '='.repeat((4 - base64String.length % 4) % 4);
+//   var base64 = (base64String + padding)
+//       .replace(/\-/g, '+')
+//       .replace(/_/g, '/');
 
-  var rawData = window.atob(base64);
-  var outputArray = new Uint8Array(rawData.length);
+//   var rawData = window.atob(base64);
+//   var outputArray = new Uint8Array(rawData.length);
 
-  for (var i = 0; i < rawData.length; ++i) {
-      outputArray[i] = rawData.charCodeAt(i);
-  }
-  return outputArray;
-}
+//   for (var i = 0; i < rawData.length; ++i) {
+//       outputArray[i] = rawData.charCodeAt(i);
+//   }
+//   return outputArray;
+// }
 
-class Profile extends Component {
+// class Profile extends Component {
   
-  state = {
-    image: null,
-    supportsCamera: 'mediaDevices' in navigator
-  }
+//   state = {
+//     image: null,
+//     supportsCamera: 'mediaDevices' in navigator
+//   }
 
-  changeImage = (e) => {
-    this.setState({
-      image:URL.createObjectURL(e.target.files[0])
-    })
-  }
+//   changeImage = (e) => {
+//     this.setState({
+//       image:URL.createObjectURL(e.target.files[0])
+//     })
+//   }
 
-  startChangeImage = () => {
-    this.setState({ enableCamera: !this.state.enableCamera})
-  }
+//   startChangeImage = () => {
+//     this.setState({ enableCamera: !this.state.enableCamera})
+//   }
 
-  takeImage = () => {
-    this._canvas.width = this._video.videoWidth
-    this._canvas.height = this._video.videoHeight
-    this._canvas.getContext('2d').drawImage(
-      this._video,
-      0,0,
-      this._video.videoWidth,
-      this._video.videoHeight
-    )
-    this._video.srcObject.getVideoTracks().forEach(track => {
-      track.stop()
-    });
+//   takeImage = () => {
+//     this._canvas.width = this._video.videoWidth
+//     this._canvas.height = this._video.videoHeight
+//     this._canvas.getContext('2d').drawImage(
+//       this._video,
+//       0,0,
+//       this._video.videoWidth,
+//       this._video.videoHeight
+//     )
+//     this._video.srcObject.getVideoTracks().forEach(track => {
+//       track.stop()
+//     });
 
-    this.setState({
-      image: this._canvas.toDataURL(),
-      enableCamera: false
-    })
-  }
+//     this.setState({
+//       image: this._canvas.toDataURL(),
+//       enableCamera: false
+//     })
+//   }
 
-  subscribe = () => {
-    const key = "BC3CER1U3cdOr5Qau5QKJOM0n6IEpnr4ysG1G7E5rN12g9c-ydOnzIHg-AciSLwxCzfbpQhpPBmdyqiH52FzzjI"
+//   subscribe = () => {
+//     const key = "BC3CER1U3cdOr5Qau5QKJOM0n6IEpnr4ysG1G7E5rN12g9c-ydOnzIHg-AciSLwxCzfbpQhpPBmdyqiH52FzzjI"
 
-    global.registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(key)
-    }).then( sub => {
-      console.log("Subscribed")
-    }).catch(err => {
-      console.log("Did not Subscribed")
-    })
-  }
+//     global.registration.pushManager.subscribe({
+//       userVisibleOnly: true,
+//       applicationServerKey: urlBase64ToUint8Array(key)
+//     }).then( sub => {
+//       console.log("Subscribed")
+//     }).catch(err => {
+//       console.log("Did not Subscribed")
+//     })
+//   }
 
 
-  render(){
-    return (
-      <div>
-        <nav className="navbar navbar-light bg-light">
-          <span className="navbar-branc mb-0 h1">
-            <Link to="/">
-              <img src={Back} alt="logo" style={{height:30}} />
-            </Link>
-            Profile
-          </span>
-        </nav>
+//   render(){
+//     return (
+//       <div>
+//         <nav className="navbar navbar-light bg-light">
+//           <span className="navbar-branc mb-0 h1">
+//             <Link to="/">
+//               <img src={Back} alt="logo" style={{height:30}} />
+//             </Link>
+//             Profile
+//           </span>
+//         </nav>
   
-        <div style={{ textAligh: "center"}}>
-          <img src={this.state.image || GreyProfile} alt="profile"
-          style={{height:200, marginTop: 50}} />
-          <p style={{color: '#888, fontSize:20'}}>username</p>
+//         <div style={{ textAligh: "center"}}>
+//           <img src={this.state.image || GreyProfile} alt="profile"
+//           style={{height:200, marginTop: 50}} />
+//           <p style={{color: '#888, fontSize:20'}}>username</p>
 
-          {
-            this.state.enableCamera && 
-            <div>
-              <video 
-              ref={c => {
-                this._video = c
-                if(this._video) {
-                  navigator.mediaDevices.getUserMedia({video: true})
-                    .then(stream => this._video.srcObject = stream)
-                }
-              }}
-              controls={false}
-              autoPlay
-              style={{width: '100%', maxWidth:300}}></video>
+//           {
+//             this.state.enableCamera && 
+//             <div>
+//               <video 
+//               ref={c => {
+//                 this._video = c
+//                 if(this._video) {
+//                   navigator.mediaDevices.getUserMedia({video: true})
+//                     .then(stream => this._video.srcObject = stream)
+//                 }
+//               }}
+//               controls={false}
+//               autoPlay
+//               style={{width: '100%', maxWidth:300}}></video>
 
-              <br />
-              <button
-              onClick={this.takeImage}
-              >Take Image </button>
+//               <br />
+//               <button
+//               onClick={this.takeImage}
+//               >Take Image </button>
 
-              <canvas 
-              ref={c => this._canvas =c}
-              style={{display: 'none'}} />
-            </div>
-          }
+//               <canvas 
+//               ref={c => this._canvas =c}
+//               style={{display: 'none'}} />
+//             </div>
+//           }
   
-          <br />
-          {
-            this.state.supportsCamera && 
-            <button
-            onClick={this.startChangeImage}
-            >
-              Toggle Camera
-            </button>
-          }
+//           <br />
+//           {
+//             this.state.supportsCamera && 
+//             <button
+//             onClick={this.startChangeImage}
+//             >
+//               Toggle Camera
+//             </button>
+//           }
 
-          <br />
-          <button onClick={this.subscribe}>Subscribe for Notifications</button>
-        </div>
-      </div>
+//           <br />
+//           <button onClick={this.subscribe}>Subscribe for Notifications</button>
+//         </div>
+//       </div>
 
-    )
+//     )
 
-  }
-}
+//   }
+// }
 
 class App extends Component {
 
@@ -182,7 +182,7 @@ class App extends Component {
   }
 
   deleteItem = (itemId) => {
-    fetch('/items.json',{
+    fetch('http://localhost:4567/items.json',{
       method: 'Delete',
       body:JSON.stringify({id:itemId}),
       headers:{
